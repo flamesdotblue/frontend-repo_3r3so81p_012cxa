@@ -1,50 +1,49 @@
+import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Services from './components/Services';
-import Coverage from './components/Coverage';
-import Contact from './components/Contact';
-import { useEffect, useState } from 'react';
+import QuickBooking from './components/QuickBooking';
+import Footer from './components/Footer';
 
 export default function App() {
-  // Simple shrink-on-scroll header effect
-  const [scrolled, setScrolled] = useState(false);
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 10);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-white text-[#2a2a2a]">
-      {/* Header */}
-      <header className={`${scrolled ? 'backdrop-blur bg-white/70 shadow-sm' : 'bg-transparent'} fixed inset-x-0 top-0 z-50 transition-all`}>
-        <div className="mx-auto flex h-16 items-center justify-between px-6 max-w-6xl">
-          <a href="#home" className="flex items-center gap-2 font-extrabold text-[#0b224b]">
-            <span className="text-xl">EuroTow Solutions</span>
-          </a>
-          <nav className="hidden sm:flex items-center gap-6 text-sm font-semibold text-[#0b224b]">
-            <a href="#services" className="hover:text-[#1a4d8f]">Services</a>
-            <a href="#coverage" className="hover:text-[#1a4d8f]">Coverage</a>
-            <a href="#contact" className="hover:text-[#1a4d8f]">Contact</a>
-            <a href="tel:+447561616464" className="rounded-md bg-[#1a4d8f] px-3 py-1.5 text-white hover:bg-[#163f74]">Call +44 7561 616464</a>
-          </nav>
-        </div>
-      </header>
-
-      {/* Sections */}
-      <main className="pt-16">
+    <div className="min-h-screen bg-black text-white">
+      <Navbar />
+      <main>
         <Hero />
-        <Services />
-        <Coverage />
-        <Contact />
-      </main>
+        <QuickBooking />
 
-      {/* Footer */}
-      <footer className="border-t border-gray-200 bg-[#f5f5f5] py-6">
-        <div className="mx-auto max-w-6xl px-6 text-sm text-[#3f3f41] flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p>© {new Date().getFullYear()} EuroTow Solutions. All rights reserved.</p>
-          <p>Registered Address: 124-128 City Road, London, England, EC1V 2NX • UK & European Coverage</p>
-        </div>
-      </footer>
+        {/* Locations */}
+        <section id="locations" className="relative py-16 bg-gradient-to-b from-black to-[#0b0f14]">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-2xl sm:text-3xl font-extrabold">Locations</h2>
+              <span className="text-xs sm:text-sm text-white/60">UK nationwide • Europe-wide</span>
+            </div>
+            <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              {['London','Manchester','Birmingham','Leeds','Glasgow','Bristol','Paris','Berlin','Madrid','Rome','Amsterdam','Brussels'].map((c)=> (
+                <div key={c} className="rounded-lg bg-white/5 ring-1 ring-white/10 px-3 py-2 text-center text-sm text-white/80">
+                  {c}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Gallery */}
+        <section id="gallery" className="relative py-16 bg-[#0b0f14]">
+          <div className="mx-auto max-w-7xl px-6">
+            <h2 className="text-2xl sm:text-3xl font-extrabold">Gallery</h2>
+            <p className="mt-2 text-white/70">Precision moves, premium fleet, enclosed and open transport.</p>
+            <div className="mt-6 grid grid-cols-2 md:grid-cols-3 gap-3">
+              {[1,2,3,4,5,6].map((i) => (
+                <div key={i} className="aspect-[4/3] overflow-hidden rounded-xl ring-1 ring-white/10 bg-gradient-to-br from-white/10 to-white/5">
+                  <div className="h-full w-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.2),transparent_60%)]" />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
     </div>
   );
 }
